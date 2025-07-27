@@ -25,6 +25,8 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import type { HTMLButtonElement } from "react"
+import { EnrollmentImport } from "@/components/enrollment-import"
+import type { ParsedSemester } from "@/lib/enrollment-parser"
 
 // Helper function to generate a unique ID
 const generateUniqueId = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
@@ -244,6 +246,21 @@ export default function WAMCalculator() {
       isEditingName: false,
     }
     setSemesters((prev) => [...prev, newSemester])
+  }
+
+  // Handle enrollment record import
+  const handleEnrollmentImport = (importedSemesters: ParsedSemester[]) => {
+    const convertedSemesters: Semester[] = importedSemesters.map((semester) => ({
+      id: semester.id,
+      name: semester.name,
+      subjects: semester.subjects,
+      createdAt: new Date(),
+      order: semester.order,
+      isEditingName: false,
+    }))
+    
+    setSemesters(convertedSemesters)
+    setError(null)
   }
 
   // Delete a semester
@@ -1208,6 +1225,8 @@ export default function WAMCalculator() {
               <Upload className="w-4 h-4 mr-2" />
               Import Data
             </Button>
+
+            <EnrollmentImport onImport={handleEnrollmentImport} />
 
             <Link href="/advanced">
               <Button
