@@ -1041,7 +1041,7 @@ export default function WAMCalculator() {
           <CardContent className="p-4 text-center">
             <div className={`text-sm ${isDark ? "text-slate-400" : "text-gray-600"} space-y-2`}>
               <p>
-                <span className="font-semibold">Made by NegoshiiEita</span>
+                <span className="font-semibold">Made by NegoshiiEita and Riva Pereira</span>
                 <span className="mx-2">{"^_^"}</span>
                 <span>{""}</span>
               </p>
